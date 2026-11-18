@@ -1,228 +1,167 @@
-# Python Modules — Arithmetic Operations & Datetime
+# Project 04 — Python System & Network Administration
 
 ## Overview
 
-This project demonstrates the fundamentals of Python modules, functions, and code reuse.
+A Python scripting project developed from practical System Scripting labs at Centennial College.
 
-The objective was to create a custom Python module containing an arithmetic function, import it into a separate program, accept user input, and display the current date and time.
+This project brings together three areas of Python programming:
 
-This project was completed as part of the CNET 334 System Scripting course at Centennial College.
+- **Python Modules:** Creating and importing reusable functions.
+- **System Administration:** Managing directories, navigating the filesystem, and retrieving system information.
+- **Networking:** Resolving hostnames, identifying network services, and converting IPv4 addresses into packed binary format.
 
-> **Note:** This implementation is adapted from my original Lab 5 submission. The source code was recovered from my submitted lab documentation and renamed for clarity while preserving the original functionality.
+The objective is to consolidate the concepts covered in Labs 5–7 into a more organized Python project focused on system and network administration.
 
 ## Technologies
 
 - Python 3
-- Python Standard Library
-- `datetime` module
-- User-defined Python modules
 - PyCharm
-- Windows PowerShell
+- Windows 11
+- Python Standard Library: `os`, `socket`, `datetime`
 
-## Project Structure
+No external Python packages are required for the original lab functionality.
 
-```text
-04-python-modules/
-├── main.py
-├── math_operations.py
-├── README.md
-└── screenshots/
-    └── execution-result.png
-```
+## 1. Python Modules & Functions — Lab 5
 
-## Objectives
+Created a custom Python module containing an addition function and imported it into a separate script.
 
-- Create a reusable Python function
-- Organize code into separate modules
-- Import a user-defined module
-- Accept and process user input
-- Convert string inputs into numeric values
-- Perform arithmetic operations
-- Retrieve and display the current date and time
+**Concepts practiced:**
 
-## Implementation
+- Defining functions using `def`
+- Importing custom modules
+- Handling user input
+- Converting strings to numbers
+- Retrieving the current date and time
 
-### 1. Creating a Custom Python Module
-
-The `math_operations.py` file contains a function named `add()`.
-
-```python
-def add(a, b):
-    print(a, '+', b, '=', a + b)
-```
-
-The function accepts two arguments, calculates their sum, and displays the result.
-
-Separating this function into its own module demonstrates how Python code can be organized and reused across multiple programs.
-
-### 2. Importing the Module
-
-The main program imports the custom module using:
-
-```python
-import math_operations
-```
-
-The function is then executed using dot notation:
-
-```python
-math_operations.add(a, b)
-```
-
-This demonstrates the relationship between a module and the functions defined inside it.
-
-### 3. Processing User Input
-
-The program requests two numbers from the user:
-
-```python
-a, b = input("Enter 2 numbers: ").split()
-a, b = float(a), float(b)
-```
-
-The `input()` function reads the user's response as a string.
-
-The `split()` method separates the two values, and `float()` converts them into numbers that can be used in calculations.
-
-Using `float()` also allows the program to process decimal values.
-
-### 4. Working with Datetime
-
-The program imports Python's built-in `datetime` module:
-
-```python
-import datetime
-```
-
-The current date and time are retrieved using:
-
-```python
-date = datetime.datetime.now()
-print("Today:", date)
-```
-
-This demonstrates how standard-library modules provide functionality without requiring additional dependencies.
-
-## Verification
-
-The program was successfully executed in Windows PowerShell using Python 3.
-
-### Test Results
-
-| Verification | Result |
-|--------------|--------|
-| Python script execution | Passed |
-| Custom module import | Passed |
-| User input processing | Passed |
-| String-to-float conversion | Passed |
-| Arithmetic calculation | Passed |
-| Current date and time retrieval | Passed |
-| Program completion | Passed |
-
-### Execution Example
-
-Input:
+**Verified execution:**
 
 ```text
-Enter 2 numbers: 14 17
+Enter 2 numbers: 10 10
+Using the module math_301564663.py : 10.0 + 10.0 = 20.0
+Today: 2026-10-16 10:28:24.823710
+
+Process finished with exit code 0
 ```
 
-Output:
+**Key takeaway:** Organizing Python functionality into reusable modules instead of keeping everything in one script.
+
+## 2. Python System Administration — Lab 6
+
+Developed a Python script to automate basic Windows filesystem operations.
+
+**Implemented functionality:**
+
+- Check whether directories exist before creating them.
+- Create individual and nested directories.
+- Retrieve the current working directory and change directories.
+- Retrieve the logged-in username and operating system identifier.
+- List directory contents.
+- Recursively traverse directories using `os.walk()`.
+- Calculate the combined size of files within a directory tree.
+- Remove an empty temporary directory.
+
+**Core Python methods:**
+
+```python
+os.path.exists()
+os.mkdir()
+os.makedirs()
+os.getcwd()
+os.chdir()
+os.path.join()
+os.getlogin()
+os.name
+os.listdir()
+os.walk()
+os.path.getsize()
+os.rmdir()
+```
+
+**Verified results:**
+
+- Target directory structure created successfully.
+- Existing directories detected during subsequent execution.
+- Directory structure displayed.
+- Combined file size reported as `0 bytes` for the empty test directories.
+- Temporary student-number directory removed successfully.
+- First and second executions completed with exit code `0`.
+
+**Key takeaway:** Filesystem automation requires careful path management, existence checks, loops, and validation to avoid unintended changes.
+
+## 3. Python Networking — Lab 7
+
+Used Python's built-in `socket` module to perform three basic networking operations.
+
+### Hostname resolution
+
+```python
+socket.gethostbyname("www.apple.com")
+```
+
+**Observed result:**
 
 ```text
-Using the module math_operations.py: 14.0 + 17.0 = 31.0
-Today: 2026-11-02 01:44:51.846325
+184.26.202.199
 ```
 
-The following screenshot shows the successful execution of the program.
+DNS results can vary depending on the DNS resolver, network location, and lookup time.
 
-![Python Modules Execution Results](screenshots/execution-result.png)
-
-## Troubleshooting & Debugging
-
-During the original lab, I investigated several common Python programming mistakes.
-
-### Input Conversion
-
-The `split()` method separates strings but does not convert their data types.
-
-For example, using `split(float)` is incorrect.
-
-The correct approach is to split the input first and then convert the values:
+### Network service identification
 
 ```python
-a, b = input("Enter 2 numbers: ").split()
-a, b = float(a), float(b)
+socket.getservbyport(22)
 ```
 
-### Printing vs. Returning Values
+**Result:**
 
-The `add()` function uses `print()` to display the result rather than returning it.
+```text
+ssh
+```
 
-Therefore, the following statement would display the calculation followed by `None`:
+This identifies the registered service associated with port 22. It does not check whether the port is open.
+
+### IPv4 address conversion
 
 ```python
-print(math_operations.add(a, b))
+socket.inet_aton("192.168.6.17")
 ```
 
-This happens because functions without an explicit `return` statement return `None`.
+**Result:**
 
-The correct approach for this implementation is to call the function directly:
-
-```python
-math_operations.add(a, b)
+```text
+b'\xc0\xa8\x06\x11'
 ```
 
-### Module Imports
+The IPv4 address is represented as four packed bytes, totaling 32 bits.
 
-A custom Python module must be located somewhere Python can find it.
+**Key takeaway:** Python can perform basic networking operations programmatically through its standard library.
 
-For this project, `main.py` and `math_operations.py` are stored in the same directory, allowing the import to work without additional configuration.
+## Project Consolidation — Planned
 
-## How to Run
+The next step is to refactor the completed lab exercises into a unified command-line utility.
 
-### Requirements
+**Planned functionality:**
 
-- Python 3
-- Windows, Linux, or macOS
-- No external Python packages required
+1. Display system information.
+2. Inspect directories and calculate file sizes.
+3. Resolve user-provided hostnames.
+4. Identify services associated with port numbers.
+5. Generate a timestamped text report.
 
-### Execution
+The combined application will use separate Python modules to keep system administration and networking functionality organized.
 
-1. Clone the repository:
+These features describe the intended project rebuild, not a completed implementation.
 
-```bash
-git clone https://github.com/younes-mouhri/system-scripting.git
-```
+## What I Learned
 
-2. Navigate to the project directory:
+- How Python modules help organize reusable functionality.
+- How to automate filesystem operations using the `os` module.
+- How nested loops enable recursive directory inspection.
+- How the `socket` module interacts with DNS, port-service mappings, and IPv4 representations.
+- Why validating paths and handling variable network responses matters in automation.
 
-```bash
-cd system-scripting/python/04-python-modules
-```
+---
 
-3. Execute the program:
-
-```bash
-python main.py
-```
-
-On Windows, the Python launcher can also be used:
-
-```powershell
-py main.py
-```
-
-4. Enter two numbers separated by a space.
-
-5. Review the arithmetic result and current date/time displayed in the terminal.
-
-## Key Takeaways
-
-This lab introduced me to modular programming in Python and demonstrated how functions can be organized into reusable modules.
-
-I practiced importing user-defined and standard-library modules, processing user input, converting data types, and using Python's `datetime` functionality.
-
-I also gained a better understanding of the difference between printing a value and returning a value from a function.
-
-These concepts provide a foundation for developing more advanced Python scripts and automation tools.
+**Course:** CNET 334 — System Scripting
+**Institution:** Centennial College
+**Focus:** Python, System Administration, Networking & Automation
