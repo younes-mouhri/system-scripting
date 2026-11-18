@@ -22,16 +22,24 @@ PowerShell system administration project covering:
 
 ### 02 — PowerShell File & Directory Management
 
-**Work in Progress**
+A PowerShell script that creates a temporary workspace, writes and moves files, verifies the resulting directory structure, and records a transcript.
 
-A PowerShell automation project based on Labs 1 and 3,
-covering file creation, directory management, moving files,
-and transcript recording.
+[View Project](powershell/02-file-management/README.md)
+
+### 03 — Windows Local User & Group Management
+
+A PowerShell script that creates a temporary local user and group, verifies group membership, and removes the resources it created.
+
+[View Project](powershell/03-local-user-management/README.md)
+
+### 04 — Python System & Network Administration
+
+A Python command-line tool for inspecting Windows directories, resolving IPv4 addresses, looking up registered port services, and saving timestamped reports.
+
+[View Project](python/04-system-network-admin/README.md)
 
 ## Upcoming Projects
 
-- Local User & Group Management (PowerShell)
-- Python Modules & Functions
 - Additional System Administration Automation
 
 ## Technologies
